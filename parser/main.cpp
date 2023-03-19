@@ -5,28 +5,28 @@
 using namespace std;
 
 int main() {
-    ifstream source("../../../Lodz-02_80-120MHz/DATA-2022.08.25.16.56.50.777.r3a", ios::binary);
-    ofstream output("../output.txt");
+    ifstream source("../../../Lodz-07_20-60MHz/DATA-2022.10.25.11.47.52.509.r3a", ios::binary);
+    ofstream output("../output-Lodz-07_20-60MHz-signed.txt");
 
     int16_t x;
-    int max = 60 * 1000 * 1000;
+    int max = INT_MIN;
+    int min = INT_MAX;
     while (source.read(reinterpret_cast<char *>(&x), sizeof(x))) {
-        if (x & 0x8000) {
-            x = -((~x + 1) & 0xFFFF);
+        if (max < x) {
+            max = x;
+        }
+        if (min > x) {
+            min = x;
         }
 
         output << x << endl;
-        cout << x << endl;
-        if (max < 0) {
-            source.close();
-            output.close();
-            return 0;
-        }
-        max--;
     }
 
     source.close();
     output.close();
+
+    cout << "MAX: " << max << endl;
+    cout << "MIN: " << min << endl;
 
     return 0;
 }
