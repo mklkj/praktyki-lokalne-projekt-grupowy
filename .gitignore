@@ -1,0 +1,5 @@
+cmake-build-debug
+.idea
+*.r3a
+.DS_Store
+output.txt
