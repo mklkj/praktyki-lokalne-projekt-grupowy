@@ -1,15 +1,20 @@
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 using namespace std;
 
 int main() {
-    ifstream source("../DATA-2022.10.25.11.47.52.509.r3a", ios::binary);
+    ifstream source("../../../Lodz-02_80-120MHz/DATA-2022.08.25.16.56.50.777.r3a", ios::binary);
     ofstream output("../output.txt");
 
-    uint16_t x;
+    int16_t x;
     int max = 60 * 1000 * 1000;
-    while (source.read(reinterpret_cast<char *>(&x), 2)) {
+    while (source.read(reinterpret_cast<char *>(&x), sizeof(x))) {
+        if (x & 0x8000) {
+            x = -((~x + 1) & 0xFFFF);
+        }
+
         output << x << endl;
         cout << x << endl;
         if (max < 0) {
