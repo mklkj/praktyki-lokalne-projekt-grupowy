@@ -7,6 +7,7 @@
 - zakodowane w U2, czyli wartość ujemna ma najstarszy bit....
 - po zdekodowaniu dostaniemy całą serię liczb dziesiętnych
 
+- odczyt co 5 milisekund, ale to nie ma nic do rzeczy (do kwestii odczytu danych)
 
 ## Big endian (starszy bajt na początku)
 
@@ -47,10 +48,7 @@ $ hexdump -d DATA-2022.08.25.16.56.50.777.r3a | head
 
 - Lodz-02_80-120MHz:
   - signed: max=148, min=-144
-  - unsigned: max=65532
 - Lodz-03_50-90MHz:
   - signed: max=116, min=-120
-  - unsigned: max=65532
 - Lodz-07_20-60MHz:
   - signed: max=452, min=-452
-  - unsigned: max=65532

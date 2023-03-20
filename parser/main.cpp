@@ -19,7 +19,7 @@ int main() {
             min = x;
         }
 
-        output << x << endl;
+        output << (x >> 2) << endl;
     }
 
     source.close();
