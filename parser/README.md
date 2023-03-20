@@ -24,7 +24,7 @@ $ xxd -b DATA-2022.08.25.16.56.50.777.r3a | head
 ```
 
 
-Odczytuje liczby "tak jak są", interpretując pierwszy bajt, jakby był tym starszym (big endian)
+Odczytanie liczb "tak jak są", interpretując pierwszy bajt, jakby był tym starszym (big endian)
 ```sh
 $ cat DATA-2022.08.25.16.56.50.777.r3a | dd conv=swab | od -d | head
 0000000     58623    4096   63743    1024   58623    5120   63743    2048
@@ -33,7 +33,7 @@ $ cat DATA-2022.08.25.16.56.50.777.r3a | dd conv=swab | od -d | head
 
 ## Little endian (młodszy bajt na początku)
 
-Odczytuje liczby, zamieniając miejscami pierwszy bajt z drugim, biorąc najpierw drugi bajt jako starszy, pierwszy jako młodszy (little endian)
+Odczytanie liczb, zamieniając miejscami pierwszy bajt z drugim, biorąc najpierw drugi bajt jako starszy, pierwszy jako młodszy (little endian)
 ```sh
 $ hexdump -d DATA-2022.08.25.16.56.50.777.r3a | head
 0000000   65508   00016   65528   00004   65508   00020   65528   00008
@@ -41,14 +41,34 @@ $ hexdump -d DATA-2022.08.25.16.56.50.777.r3a | head
 
 ## U2
 
-65508 to -28 interpretując binarną liczbę jako będącą w zapisie U2
+65508 to w zapisie U2 będzie -28.
 
+## Przesunięcie bitowe
 
-## Wyniki
+Tak wyciągnięte dane są przesunięte o dwa bity w lewo, więc żeby uzyskać ostateczny wynik, trzeba przesunąć każdą liczbę 2 bity w prawo (to samo co dzielenie przez 4).
+
+## Konwersja
+
+1. Dane binarne
+2. Hex
+3. Hex, ale grupując po dwa bajty i w little endian
+4. Konwersja na dziesiętną
+5. Konwersja na dziesiętną, ale ze znakiem (U2 - kod uzupełnień do dwóch)
+6. Przesunięcie bitowe w prawo o dwie pozycje — efektywnie dzielenie przez 4
+
+`11100100 11111111` -> `e4 ff` --> `ffe4` --> `65508` --> `-28` --> `-7`
+
+## Metadane
 
 - Lodz-02_80-120MHz:
-  - signed: max=148, min=-144
+  - max = 37
+  - min = -36
+  - samples = 252_013_248
 - Lodz-03_50-90MHz:
-  - signed: max=116, min=-120
+  - max = 29
+  - min = -30
+  - samples = 252_013_248
 - Lodz-07_20-60MHz:
-  - signed: max=452, min=-452
+  - max = 113
+  - min = -113
+  - samples = 252_013_248
