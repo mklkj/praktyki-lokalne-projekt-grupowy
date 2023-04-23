@@ -72,3 +72,15 @@ Tak wyciągnięte dane są przesunięte o dwa bity w lewo, więc żeby uzyskać 
   - max = 113
   - min = -113
   - samples = 252_013_248
+
+## Skrypty
+
+```shell
+$ python3 r3a_decode.py
+Enter the file name (without .r3a extension): DATA-2022.10.25.11.47.52.509
+$ python3 python3 binary_cutter.py
+Podaj nazwę pliku: output-DATA-2022.10.25.11.47.52.509.txt
+Podaj liczbę linii do odczytania: 16384
+$ python3 fourier_with_graph.py                                                                                                      ✘ 1 master ✱
+Wpisz nazwę zdekodowanego pliku r3a: short_test.txt
+```
